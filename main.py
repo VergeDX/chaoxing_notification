@@ -9,4 +9,11 @@ if __name__ == '__main__':
     data = {'uname': Secrets.uname, 'password': Secrets.get_pass_b64(), 't': 'true'}
     r: Response = requests.post(ApiUrls.fanyalogin, data=data)
 
-    print(r.text)
+    r_json = r.json()
+    if not r_json['status']:
+        print(r_json)
+        exit(r.status_code)
+
+    r_cookies = r.cookies
+    r: Response = requests.post(ApiUrls.getNoticeCount, cookies=r_cookies)
+    print(r.json())
