@@ -1,3 +1,5 @@
+import sys
+
 import requests
 from requests import Response
 
@@ -11,8 +13,7 @@ if __name__ == '__main__':
 
     r_json = r.json()
     if not r_json['status']:
-        print(r_json)
-        exit(r.status_code)
+        sys.exit(r_json)
 
     r_cookies = r.cookies
     r: Response = requests.post(ApiUrls.getNoticeCount, cookies=r_cookies)
