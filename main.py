@@ -11,4 +11,7 @@ if __name__ == '__main__':
 
     r_cookies = r.cookies
     r: Response = requests_post(ApiUrls.getNoticeCount, cookies=r_cookies)
-    print(r.json())
+
+    r_json_count = r.json()['count']
+    if r_json_count != 0:
+        print('New messages! ')
